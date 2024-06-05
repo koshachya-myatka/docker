@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Книги</title>
+    <link th:href="@{/styles/Style.css}" rel="stylesheet"/>
+</head>
+<body>
+<div>
+    <h2>Книги</h2>
+    <h3>Добавить книгу:</h3>
+    <form action="#" th:action="@{/books/create}" th:object="${book}" method="post">
+        <h4>Название: <input type="text" th:name="title" required></h4>
+        <h4>Кол-во страниц: <input type="number" th:name="countPage" th:min="1"></h4>
+        <h4>Кол-во на складе: <input type="number" th:name="amount" th:min="0"></h4>
+        <h4>Жанр: <select th:name="genre" width="500px">
+            <option th:value="'Фэнтези'">Фэнтези</option>
+            <option th:value="'Роман'">Роман</option>
+            <option th:value="'Романтическое фэнтези'">Романтическое фэнтези</option>
+            <option th:value="'Подростковая литература'">Подростковая литература</option>
+        </select></h4>
+        <input type="submit" value="Создать">
+    </form><br>
+
+    <h3>Список книг:</h3>
+    <div>
+        <form action="#" th:action="@{/books/searchTitle}" th:object="${title}" method="post">
+            <p>Поиск по названию:</p>
+            <input type="text" th:name="title" width="500px">
+            <input type="submit" value="Поиск">
+            <br><br>
+        </form>
+
+        <form action="#" th:action="@{/books/searchGenre}" th:object="${genre}" method="post">
+            <p>Поиск по жанру:</p>
+            <select th:name="genre" width="500px">
+                <option th:value="'Фэнтези'">Фэнтези</option>
+                <option th:value="'Роман'">Роман</option>
+                <option th:value="'Романтическое фэнтези'">Романтическое фэнтези</option>
+                <option th:value="'Подростковая литература'">Подростковая литература</option>
+            </select>
+            <input type="submit" value="Поиск"><br>
+        </form>
+
+        <form action="#" th:action="@{/books/searchAmount}" method="post">
+            <p>Только в наличии:</p>
+            <input type="submit" value="Поиск">
+            <br><br>
+        </form>
+
+        <form action="#" th:action="@{/books/groupGenre}" th:object="${genre}" method="post">
+            <p>Кол-во книг жанра:</p>
+            <select th:name="genre" width="500px">
+                <option th:value="'Фэнтези'">Фэнтези</option>
+                <option th:value="'Роман'">Роман</option>
+                <option th:value="'Романтическое фэнтези'">Романтическое фэнтези</option>
+                <option th:value="'Подростковая литература'">Подростковая литература</option>
+            </select>
+            <input type="submit" value="Найти"><br>
+        </form>
+        <h4 th:utext="'Кол-во = '+(${countBooks} == null ? 0 : ${countBooks})"></h4>
+        <a th:href="@{/books}">Сброс</a>
+    </div>
+
+    <br><br>
+    <table th:border="1" th:cellpadding="6" th:cellspacing="0" th:style="'margin: auto'">
+        <tr>
+            <td>Название книги</td>
+            <td>Количество страниц</td>
+            <td>Кол-во на складе</td>
+            <td>Жанр</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr th:each="book: ${books}">
+            <td th:text="${book.getTitle()}"></td>
+            <td th:text="${book.getCountPage()}"></td>
+            <td th:text="${book.getAmount()}"></td>
+            <td th:text="${book.getGenre()}"></td>
+            <td>
+                <form action="#" th:action="@{/books/update/{id}(id=${book.getId()})}" method="get">
+                    <input type="submit" value="Изменить">
+                </form>
+            </td>
+            <td>
+                <form action="#" th:action="@{/books/delete/{id}(id=${book.getId()})}" method="post">
+                    <input type="submit" value="Удалить">
+                </form>
+            </td>
+        </tr>
+    </table>
+    <br><a th:href="@{/collections}">Назад</a>
+</div>
+</body>
+</html>

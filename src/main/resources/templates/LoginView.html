@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в профиль</title>
+    <link th:href="@{/styles/Style.css}" rel="stylesheet"/>
+</head>
+<body>
+    <div>
+        <p th:text="${message}"></p>
+        <form action="#" th:action="@{/login}" th:object="${userDto}" method="post">
+            <h4>Пользователь: <input type="text" th:name="username" required th:style="'width: 150px'"></h4>
+            <h4>Пароль: <input type="password" th:name="password" required th:style="'width: 150px'"></h4>
+            <input type="submit" value="Войти">
+        </form>
+    </div>
+</body>
+</html>

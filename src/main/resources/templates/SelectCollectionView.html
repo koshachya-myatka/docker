@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор коллекции</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link th:href="@{/styles/Style.css}" rel="stylesheet"/>
+</head>
+<body>
+    <div>
+        <h2>Выбор коллекции:</h2>
+        <table>
+            <tr>
+                <td>
+                    <form method="get" action="/authors">
+                        <input type="submit" value="Авторы">
+                    </form>
+                </td>
+                <td style="color: #43343400">___</td>
+                <td>
+                    <form method="get" action="/books">
+                        <input type="submit" value="Книги">
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td style="color: #43343400">___</td>
+                <td style="color: #43343400">___</td>
+            </tr>
+            <tr>
+                <td>
+                    <form method="get" action="/orders">
+                        <input type="submit" value="Заказы">
+                    </form>
+                </td>
+                <td style="color: #43343400">___</td>
+                <td>
+                    <form method="get" action="/clients">
+                        <input type="submit" value="Пользователи">
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <br><a th:href="@{/login}">Выход</a>
+    </div>
+</body>
+</html>

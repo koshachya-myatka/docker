@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбранная книга</title>
+    <link th:href="@{/styles/Style.css}" rel="stylesheet"/>
+</head>
+<body>
+    <div>
+        <h2>Книга</h2>
+            <form action="#" th:action="@{/books/update/{id}(id=${book.getId()})}" th:object="${newBook}" method="post">
+            <h3>Название: <input type="text" th:name="title" th:value="${book.getTitle()}"></h3>
+            <h4>Кол-во страниц: <input type="number" th:name="countPage" th:value="${book.getCountPage()}"></h4>
+            <h4>Кол-во на складе: <input type="number" th:name="amount" th:value="${book.getAmount()}"></h4>
+            <h4>Жанр: <select th:name="genre" width="500px">
+                <option th:value="'Фэнтези'">Фэнтези</option>
+                <option th:value="'Роман'">Роман</option>
+                <option th:value="'Романтическое фэнтези'">Романтическое фэнтези</option>
+                <option th:value="'Подростковая литература'">Подростковая литература</option>
+            </select></h4>
+            <input type="hidden" th:name="id" th:value="${book.getId}">
+            <input type="submit" value="Изменить">
+        </form>
+        <a th:href="@{/books}">Назад</a>
+    </div>
+</body>
+</html>
