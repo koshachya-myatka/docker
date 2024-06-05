@@ -176,8 +176,6 @@ db.books.createIndexes([{"title" : 1}, {"amount" : 1}, {"genre" : 1}, {"title" :
 db.clients.createIndexes([{"login" : 1, "password" : 1}]);
 db.orders.createIndexes([{"dateOrder" : 1}, {"idClient" : 1}, {"idBook" : 1}, {"idClient" : 1, "dateOrder" : 1}]);
 
-db = db.getSiblingDB("admin");
-
 db.createRole(
     {
       role: "CLIENT_ROLE", 

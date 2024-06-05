@@ -11,20 +11,17 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=rootpass
     volumes:
       - ./src/main/resources/db/:/docker-entrypoint-initdb.d/:ro
-
-#  mongo-express:
-#    image: mongo-express
-#    container_name: mongo-express
-#    ports:
-#      - 8081:8081
-#    restart: always
-#    environment:
-#      - ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser
-#      - ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
-#      - ME_CONFIG_MONGODB_URL=mongodb://rootuser:rootpass@mongodb/?authSource=admin&authMechanism=SCRAM-SHA-1
-#      - ME_CONFIG_MONGODB_SERVER=mongodb
-#    depends_on:
-#      - mongodb
+    healthcheck:
+      test:
+        [
+          'CMD-SHELL',
+          'mongosh --eval "db.adminCommand(\"ping\")" mongodb://%s:%s@mongodb/?authSource=project_db&authMechanism=SCRAM-SHA-1'
+        ]
+      interval: 0s
+      timeout: 3s
+      retries: 5
+      start_period: 1s
+      start_interval: 1s
 
   springapp:
     build:
@@ -38,8 +35,5 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      - mongodb
-#      - mongo-express
-
-# volumes:
-#    data: {}
+      mongodb:
+        condition: service_healthy

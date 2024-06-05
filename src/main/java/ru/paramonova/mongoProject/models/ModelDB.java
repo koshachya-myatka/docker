@@ -16,7 +16,7 @@ public class ModelDB {
 
     public ModelDB(String username, String password) {
         try {
-           ConnectionString connectionString = new ConnectionString(String.format("mongodb://%s:%s@mongodb/project_db?authSource=admin&authMechanism=SCRAM-SHA-1", username, password));           
+           ConnectionString connectionString = new ConnectionString(String.format("mongodb://%s:%s@mongodb/?authSource=project_db&authMechanism=SCRAM-SHA-1", username, password));           
             MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
                     .applyConnectionString(connectionString)
                     .build();
